@@ -1,6 +1,7 @@
 import { load } from "ts-dotenv";
 
 import express from "express";
+import ServerlessHttp from "serverless-http";
 import mongoose from "mongoose";
 import cors from "cors";
 
@@ -26,8 +27,9 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors());
 
-app.use("/movies", moviesRoutes);
+app.use("/.netlify/functions/routes/moviesRoutes", moviesRoutes);
 
 app.listen(env.PORT, () => console.log(`Listeninig to Port ${env.PORT}`));
 
+module.exports.hanlder = ServerlessHttp(app);
 export = {};
