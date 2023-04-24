@@ -5,7 +5,7 @@ const serverless = require("serverless-http");
 import mongoose from "mongoose";
 import cors from "cors";
 
-import moviesRoutes from "./routes/moviesRoutes";
+const moviesRoutes = require("./routes/moviesRoutes");
 
 const env = load({
     MONGO_DB: String,
@@ -27,7 +27,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors());
 
-app.use("/movies", moviesRoutes);
+app.use("/.netlify/functions/server", moviesRoutes);
 module.exports.handler = serverless(app);
 
 app.listen(env.PORT, () => console.log(`Listeninig to Port ${env.PORT}`));
