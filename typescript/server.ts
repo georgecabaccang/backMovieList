@@ -27,7 +27,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors());
 
-app.use("/.netlify/functions/routes/moviesRoutes", moviesRoutes);
+app.use("/movies", moviesRoutes);
 
 app.listen(env.PORT, () => console.log(`Listeninig to Port ${env.PORT}`));
 

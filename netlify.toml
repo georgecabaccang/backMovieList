@@ -2,5 +2,11 @@
     directory="functions"
 
 [[redirects]]
-    from = "/.netlify/functions/routes/moviesRoutes"
-    to = "/"
+    from = "/*"
+    to = "/.netlify/functions/routes/moviesRoutes"
+
+[[headers]]
+
+for = "/*"
+    [headers.values]
+    Access-Control-Allow-Origin = "*"
