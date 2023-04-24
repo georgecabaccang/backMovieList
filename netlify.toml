@@ -1,7 +1,0 @@
-[functions]
-    directory="functions"
-
-[[redirects]]
-    from = "/movies"
-    to = "/.netlify/functions/routes/moviesRoutes"
-
