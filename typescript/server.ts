@@ -1,6 +1,7 @@
 import { load } from "ts-dotenv";
 
 import express from "express";
+const serverless = require("serverless-http");
 import mongoose from "mongoose";
 import cors from "cors";
 
@@ -27,6 +28,7 @@ app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors());
 
 app.use("/movies", moviesRoutes);
+module.exports.handler = serverless(app);
 
 app.listen(env.PORT, () => console.log(`Listeninig to Port ${env.PORT}`));
 

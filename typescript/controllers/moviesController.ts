@@ -46,7 +46,7 @@ export const updateMovie = async (req: Request, res: Response) => {
 export const getMovies = async (req: Request, res: Response) => {
     try {
         const movies = await Movie.find();
-        res.send(movies);
+        res.json(movies);
     } catch (error) {
         if (error instanceof Error) res.send({ message: error.message });
     }
