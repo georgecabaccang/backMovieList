@@ -25,8 +25,8 @@ db.once("open", () => console.log("Connected to DB."));
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
-// app.use(cors());
-app.options("*", cors());
+app.use(cors({origin: "https://movies-front-project.netlify.app"}));
+
 
 app.use("/movies", moviesRoutes);
 
