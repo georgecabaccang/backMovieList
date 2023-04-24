@@ -18,7 +18,9 @@ interface errorMDB {
     message: string;
 }
 
-mongoose.connect(env.MONGO_DB);
+mongoose.connect(
+    "mongodb+srv://miniprojects:miniprojects@projects.wpbsykb.mongodb.net/movies?retryWrites=true&w=majority"
+);
 const db = mongoose.connection;
 db.on("error", (error: errorMDB) => console.log(error.message));
 db.once("open", () => console.log("Connected to DB."));
@@ -29,7 +31,8 @@ app.use(cors());
 
 app.use("/.netlify/functions/server", moviesRoutes);
 module.exports.handler = serverless(app);
+module.exports = moviesRoutes;
 
-app.listen(env.PORT, () => console.log(`Listeninig to Port ${env.PORT}`));
+app.listen(8000, () => console.log(`Listeninig to Port ${8000}`));
 
 export = {};

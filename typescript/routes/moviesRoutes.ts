@@ -16,4 +16,4 @@ moviesRoutes.delete("/removeMovie", removeMovie);
 
 moviesRoutes.patch("/updateMovie", updateMovie);
 
-export default moviesRoutes;
+module.exports = moviesRoutes;
