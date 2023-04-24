@@ -6,7 +6,6 @@
     to = "/.netlify/functions/routes/moviesRoutes"
 
 [[headers]]
-
-for = "/*"
-    [headers.values]
-    Access-Control-Allow-Origin = "*"
+    for = "/*"
+        [headers.values]
+        Access-Control-Allow-Origin = "*"
