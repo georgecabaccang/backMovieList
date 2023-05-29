@@ -19,7 +19,7 @@ interface errorMDB {
 }
 
 mongoose.connect(
-    "mongodb+srv://miniprojects:miniprojects@projects.wpbsykb.mongodb.net/movies?retryWrites=true&w=majority"
+    "mongodb+srv://miniprojects:thenewpassword@projects.wpbsykb.mongodb.net/movies?retryWrites=true&w=majority"
 );
 const db = mongoose.connection;
 db.on("error", (error: errorMDB) => console.log(error.message));
@@ -30,9 +30,8 @@ app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors());
 
 app.use("/.netlify/functions/server", moviesRoutes);
+
+app.listen(8001, () => console.log(`Listeninig to Port ${8001}`));
 module.exports.handler = serverless(app);
-module.exports = moviesRoutes;
 
-app.listen(8000, () => console.log(`Listeninig to Port ${8000}`));
-
-export = {};
+export default app;
