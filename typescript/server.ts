@@ -1,7 +1,7 @@
+require("dotenv").config();
 import { load } from "ts-dotenv";
 
 import express from "express";
-const serverless = require("serverless-http");
 import mongoose from "mongoose";
 import cors from "cors";
 
@@ -18,9 +18,7 @@ interface errorMDB {
     message: string;
 }
 
-mongoose.connect(
-    "mongodb+srv://miniprojects:thenewpassword@projects.wpbsykb.mongodb.net/movies?retryWrites=true&w=majority"
-);
+mongoose.connect(process.env.MONGO_DB as string);
 const db = mongoose.connection;
 db.on("error", (error: errorMDB) => console.log(error.message));
 db.once("open", () => console.log("Connected to DB."));
@@ -32,6 +30,5 @@ app.use(cors());
 app.use("/.netlify/functions/server", moviesRoutes);
 
 app.listen(8001, () => console.log(`Listeninig to Port ${8001}`));
-module.exports.handler = serverless(app);
 
 export default app;
