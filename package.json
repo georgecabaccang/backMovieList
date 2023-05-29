@@ -8,8 +8,7 @@
     },
     "scripts": {
         "server": "nodemon javascript/server.js",
-        "start": "netlify ./node_module/.bin/netlify-lambda serve functions",
-        "vercel-build": "Okay"
+        "start": "netlify ./node_module/.bin/netlify-lambda serve functions"
     },
     "dependencies": {
         "@types/node": "^18.15.3",
