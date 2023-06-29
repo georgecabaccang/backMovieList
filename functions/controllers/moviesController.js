@@ -64,7 +64,7 @@ exports.updateMovie = updateMovie;
 const getMovies = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const movies = yield moviesModel_1.default.find();
-        res.json(movies);
+        return res.send(movies);
     }
     catch (error) {
         if (error instanceof Error)
