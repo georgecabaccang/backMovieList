@@ -22,5 +22,8 @@ app.use(express_1.default.json({ limit: "50mb" }));
 app.use(express_1.default.urlencoded({ limit: "50mb" }));
 app.use((0, cors_1.default)({ credentials: true, origin: "https://front-movie-list.vercel.app" }));
 app.use("/movies", moviesRoutes);
+app.get("/", (req, res) => {
+    return res.send({ message: "Okay" });
+});
 app.listen(8001, () => console.log(`Port ${8001}`));
 exports.default = app;

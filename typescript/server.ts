@@ -1,7 +1,7 @@
 require("dotenv").config();
 import { load } from "ts-dotenv";
 
-import express from "express";
+import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 
@@ -28,6 +28,9 @@ app.use(express.urlencoded({ limit: "50mb" }));
 app.use(cors({ credentials: true, origin: "https://front-movie-list.vercel.app" }));
 
 app.use("/movies", moviesRoutes);
+app.get("/", (req: Request, res: Response) => {
+    return res.send({ message: "Okay" });
+});
 
 app.listen(8001, () => console.log(`Port ${8001}`));
 
