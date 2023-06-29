@@ -25,11 +25,10 @@ db.once("open", () => console.log("Connected to DB."));
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
-app.use(cors({ origin: "*" }));
-// app.use(cors());
+app.use(cors({ credentials: true, origin: "https://front-movie-list.vercel.app" }));
 
 app.use("/movies", moviesRoutes);
 
-app.listen(8001, () => console.log(`Listeninig to Port ${8001}`));
+app.listen(8001, () => console.log(`Port ${8001}`));
 
 export default app;
