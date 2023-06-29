@@ -8,6 +8,7 @@
     },
     "scripts": {
         "build": "tsc --build",
+        "vercel-build": "echo okay ",
         "server": "nodemon javascript/server.js",
         "start": "netlify ./node_module/.bin/netlify-lambda serve functions"
     },
