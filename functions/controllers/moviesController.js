@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getMovies = exports.updateMovie = exports.removeMovie = exports.addMovie = void 0;
+exports.searchMovie = exports.getMovieDetails = exports.getMovies = exports.updateMovie = exports.removeMovie = exports.addMovie = void 0;
 const moviesModel_1 = __importDefault(require("../models/moviesModel"));
 // import { MovieModel } from "../types/modelTypes";
 const addMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -72,3 +72,32 @@ const getMovies = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getMovies = getMovies;
+const getMovieDetails = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const movie_id = req.params.movie_id;
+    try {
+        const movieDetails = yield moviesModel_1.default.findById(movie_id);
+        if (movieDetails) {
+            return res.send(movieDetails);
+        }
+        return res.send("movie not found").status(404);
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            return res.send({ message: error.message });
+        }
+    }
+});
+exports.getMovieDetails = getMovieDetails;
+const searchMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const query = req.body.query;
+        const movies = yield moviesModel_1.default.find({ title: { $regex: query, $options: "i" } });
+        return res.send(movies).status(200);
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            return res.send({ message: error.message });
+        }
+    }
+});
+exports.searchMovie = searchMovie;

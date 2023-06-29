@@ -21,6 +21,6 @@ db.once("open", () => console.log("Connected to DB."));
 app.use(express_1.default.json({ limit: "50mb" }));
 app.use(express_1.default.urlencoded({ limit: "50mb" }));
 app.use((0, cors_1.default)());
-app.use("/.netlify/functions/server", moviesRoutes);
+app.use("/movies", moviesRoutes);
 app.listen(8001, () => console.log(`Listeninig to Port ${8001}`));
 exports.default = app;
