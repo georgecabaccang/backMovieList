@@ -25,7 +25,7 @@ db.once("open", () => console.log("Connected to DB."));
 
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
-app.use(cors({ credentials: false, origin: "https://front-movie-list.vercel.app/movies" }));
+app.use(cors({ credentials: false, origin: "https://front-movie-list.vercel.app" }));
 
 app.use("/movies", moviesRoutes);
 
