@@ -29,16 +29,23 @@ export const removeMovie = async (req: Request, res: Response) => {
 };
 
 export const updateMovie = async (req: Request, res: Response) => {
-    try {
-        await Movie.findByIdAndUpdate(req.body._id, {
-            image: req.body.image,
-            title: req.body.title,
-            description: req.body.description,
-            rating: req.body.rating,
-        });
+    const image = req.body.updatedDetails.image;
+    const title = req.body.updatedDetails.title;
+    const description = req.body.updatedDetails.description;
+    const rating = req.body.updatedDetails.rating;
 
-        const movie = await Movie.findById(req.body._id);
-        res.send(true);
+    try {
+        const movie = await Movie.findById(req.body.updatedDetails._id);
+        if (movie) {
+            movie.image = image;
+            movie.title = title;
+            movie.description = description;
+            movie.rating = rating;
+
+            await movie.save();
+            return res.send(movie).status(200);
+        }
+        return res.send("movie not found").status(404);
     } catch (error) {
         if (error instanceof Error) res.send({ message: error.message });
     }

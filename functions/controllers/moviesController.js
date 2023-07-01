@@ -45,15 +45,21 @@ const removeMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.removeMovie = removeMovie;
 const updateMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const image = req.body.updatedDetails.image;
+    const title = req.body.updatedDetails.title;
+    const description = req.body.updatedDetails.description;
+    const rating = req.body.updatedDetails.rating;
     try {
-        yield moviesModel_1.default.findByIdAndUpdate(req.body._id, {
-            image: req.body.image,
-            title: req.body.title,
-            description: req.body.description,
-            rating: req.body.rating,
-        });
-        const movie = yield moviesModel_1.default.findById(req.body._id);
-        res.send(true);
+        const movie = yield moviesModel_1.default.findById(req.body.updatedDetails._id);
+        if (movie) {
+            movie.image = image;
+            movie.title = title;
+            movie.description = description;
+            movie.rating = rating;
+            yield movie.save();
+            return res.send(movie).status(200);
+        }
+        return res.send("movie not found").status(404);
     }
     catch (error) {
         if (error instanceof Error)
