@@ -26,4 +26,6 @@ app.use("/movies", moviesRoutes);
 
 app.listen(8001, () => console.log(`Port ${8001}`));
 
+
 export default app;
+  
