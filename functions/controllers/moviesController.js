@@ -17,15 +17,16 @@ const moviesModel_1 = __importDefault(require("../models/moviesModel"));
 // import { MovieModel } from "../types/modelTypes";
 const addMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const movieDetails = req.body.movieDetails;
         const newMovie = new moviesModel_1.default({
-            image: req.body.image,
-            title: req.body.title,
-            description: req.body.description,
-            rating: req.body.rating,
-            date: req.body.date,
+            image: movieDetails.image,
+            title: movieDetails.title,
+            description: movieDetails.description,
+            rating: movieDetails.rating,
+            date: movieDetails.date,
         });
         yield newMovie.save();
-        res.send(true);
+        return res.send(true);
     }
     catch (error) {
         if (error instanceof Error)
@@ -35,12 +36,12 @@ const addMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.addMovie = addMovie;
 const removeMovie = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield moviesModel_1.default.findOneAndDelete({ _id: req.body._id });
-        res.send(true);
+        yield moviesModel_1.default.findOneAndDelete({ _id: req.params.movie_id });
+        return res.send(true);
     }
     catch (error) {
         if (error instanceof Error)
-            res.send({ message: error.message });
+            res.send("movie not found");
     }
 });
 exports.removeMovie = removeMovie;
@@ -89,7 +90,7 @@ const getMovieDetails = (req, res) => __awaiter(void 0, void 0, void 0, function
     }
     catch (error) {
         if (error instanceof Error) {
-            return res.send({ message: error.message });
+            return res.send("movie not found");
         }
     }
 });

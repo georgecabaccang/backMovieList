@@ -1,19 +1,19 @@
-import { stat, statfs } from "fs";
 import Movie from "../models/moviesModel";
 import { Request, Response } from "express";
 // import { MovieModel } from "../types/modelTypes";
 
 export const addMovie = async (req: Request, res: Response) => {
     try {
+        const movieDetails = req.body.movieDetails;
         const newMovie = new Movie({
-            image: req.body.image,
-            title: req.body.title,
-            description: req.body.description,
-            rating: req.body.rating,
-            date: req.body.date,
+            image: movieDetails.image,
+            title: movieDetails.title,
+            description: movieDetails.description,
+            rating: movieDetails.rating,
+            date: movieDetails.date,
         });
         await newMovie.save();
-        res.send(true);
+        return res.send(true);
     } catch (error) {
         if (error instanceof Error) res.send({ message: error.message });
     }
@@ -21,10 +21,10 @@ export const addMovie = async (req: Request, res: Response) => {
 
 export const removeMovie = async (req: Request, res: Response) => {
     try {
-        await Movie.findOneAndDelete({ _id: req.body._id });
-        res.send(true);
+        await Movie.findOneAndDelete({ _id: req.params.movie_id });
+        return res.send(true);
     } catch (error) {
-        if (error instanceof Error) res.send({ message: error.message });
+        if (error instanceof Error) res.send("movie not found");
     }
 };
 
@@ -70,7 +70,7 @@ export const getMovieDetails = async (req: Request, res: Response) => {
         return res.send("movie not found").status(404);
     } catch (error) {
         if (error instanceof Error) {
-            return res.send({ message: error.message });
+            return res.send("movie not found");
         }
     }
 };
